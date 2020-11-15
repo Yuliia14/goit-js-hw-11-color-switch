@@ -1,3 +1,12 @@
 body {
   background-color: none;
 }
+.button {
+  color: rgb(228, 224, 224);
+  font-size: 28px;
+}
+
+.button.is-active {
+  color: black;
+  font-size: 28px;
+}

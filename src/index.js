@@ -17,22 +17,29 @@ const colors = [
 ];
 
 startTimerButtonEl.addEventListener("click", startTimerCounter);
+startTimerButtonEl.classList.add('is-active');
+
 
 function startTimerCounter() {
     if (hasBeenStarted) {
-        console.log(`Color rotation is in process`)
         return;
     }
 
-    timerId = setInterval(() => {
-    hasBeenStarted = true;
-    console.log(body.style.background = colors[randomIntegerFromInterval(0, colors.length-1)]);
-  }, 1000);
+  timerId = setInterval(() => {
+      startTimerButtonEl.removeEventListener("click", startTimerCounter);
+      hasBeenStarted = true;
+      startTimerButtonEl.classList.remove('is-active');
+      stopTimerButtonEl.classList.add('is-active');
+      body.style.background = colors[randomIntegerFromInterval(0, colors.length-1)];
+    }, 1000);
 }
 
 stopTimerButtonEl.addEventListener("click", () => {
-    clearInterval(timerId);
-    hasBeenStarted = false;
+  clearInterval(timerId);
+  hasBeenStarted = false;
+  startTimerButtonEl.addEventListener("click", startTimerCounter);
+  startTimerButtonEl.classList.add('is-active');
+  stopTimerButtonEl.classList.remove('is-active');
 });
 
 const randomIntegerFromInterval = (min, max) => {
